@@ -9,8 +9,8 @@
 <body>
   <main class="page-shell">
     <header class="hero">
-      <div class="eyebrow">LOTOFÁCIL · GERADOR DE JOGOS</div>
-      <h1>Monte seus jogos e boa sorte!</h1>
+      <div class="eyebrow">LOTOFÁCIL · GERADOR WEB</div>
+      <h1>Monte seus jogos com clareza.</h1>
       <p>Informe os números fixos e a distribuição por quadrantes. A aplicação valida a configuração e gera jogos únicos prontos para baixar.</p>
     </header>
 
@@ -42,7 +42,7 @@
           <button type="button" class="button secondary" id="add-set">+ Adicionar conjunto</button>
         </div>
         <p class="help">Cada conjunto deve somar exatamente 15 números, com no máximo 5 em cada quadrante.</p>
-        <div id="sets-container"></div>
+        <div id="sets-container" class="set-list"></div>
       </section>
 
       <section class="actions">
@@ -51,7 +51,7 @@
       </section>
     </form>
 
-    <footer>Sitema desenvolvido por Daniel Vieira para o Bolão da Independência Loto Fácil do Roger Pinho.</footer>
+    <footer>Os jogos são gerados aleatoriamente e não representam garantia de premiação.</footer>
   </main>
   <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
