@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jogos gerados | Lotofácil</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="page-shell results-shell">
+    <header class="hero compact">
+      <div class="eyebrow">LOTOFÁCIL · RESULTADO</div>
+      <h1>Seus jogos estão prontos.</h1>
+      <p>{{ total }} jogo(s) único(s) foram gerados com base na configuração informada.</p>
+    </header>
+
+    <div class="result-actions">
+      <a class="button secondary" href="{{ url_for('index') }}">← Nova configuração</a>
+      <form method="post" action="{{ url_for('download_games') }}">
+        <input type="hidden" name="games_json" value="{{ games|tojson|forceescape }}">
+        <button class="button primary" type="submit">Baixar Excel <span>↓</span></button>
+      </form>
+    </div>
+
+    <section class="card results-card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Identificação</th><th>Números</th></tr></thead>
+          <tbody>
+            {% for game in games %}
+              <tr>
+                <td><strong>{{ game.identifier }}</strong></td>
+                <td><div class="number-list">{% for number in game.numbers %}<span>{{ '%02d'|format(number) }}</span>{% endfor %}</div></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <footer>Sitema desenvolvido por Daniel Vieira para o Bolão da Independência Loto Fácil do Roger Pinho.</footer>
+  </main>
+</body>
+</html>

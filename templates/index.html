@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerador de Jogos | Lotofácil</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <div class="eyebrow">LOTOFÁCIL · GERADOR DE JOGOS</div>
+      <h1>Monte seus jogos e boa sorte!</h1>
+      <p>Informe os números fixos e a distribuição por quadrantes. A aplicação valida a configuração e gera jogos únicos prontos para baixar.</p>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <section class="alerts" aria-live="polite">
+          {% for category, message in messages %}
+            <div class="alert {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </section>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" id="game-form">
+      <section class="card fixed-card">
+        <div class="section-heading">
+          <div><span class="step">01</span><h2>Números fixos</h2></div>
+          <span class="optional">Opcional</span>
+        </div>
+        <p class="help">Números que deverão aparecer em todos os jogos.</p>
+        <label for="fixed_numbers">Números separados por vírgula</label>
+        <input id="fixed_numbers" name="fixed_numbers" type="text" inputmode="numeric" placeholder="Ex.: 1, 5, 8, 12, 20">
+        <small>Use números de 1 a 25. O limite é de 15 números fixos.</small>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <div><span class="step">02</span><h2>Conjuntos de quadrantes</h2></div>
+          <button type="button" class="button secondary" id="add-set">+ Adicionar conjunto</button>
+        </div>
+        <p class="help">Cada conjunto deve somar exatamente 15 números, com no máximo 5 em cada quadrante.</p>
+        <div id="sets-container"></div>
+      </section>
+
+      <section class="actions">
+        <button class="button secondary" formaction="{{ url_for('validate_configuration') }}" type="submit">Validar configuração</button>
+        <button class="button primary" formaction="{{ url_for('generate_games') }}" type="submit">Gerar jogos <span>→</span></button>
+      </section>
+    </form>
+
+    <footer>Sitema desenvolvido por Daniel Vieira para o Bolão da Independência Loto Fácil do Roger Pinho.</footer>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
