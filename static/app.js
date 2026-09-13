@@ -32,13 +32,22 @@
     const index = nextId++;
     const card = document.createElement('fieldset');
     card.className = 'set-card';
+    const ranges = {
+      1: '1 a 5',
+      2: '6 a 10',
+      3: '11 a 15',
+      4: '16 a 20',
+      5: '21 a 25',
+    };
     card.innerHTML = `
       <legend>Conjunto de quadrantes ${index + 1}</legend>
       <input type="hidden" name="set_id" value="${index + 1}">
       <div class="quadrant-grid">
         ${[1, 2, 3, 4, 5].map((q) => `
-          <label>Q${q}<span>${(q - 1) * 5 + 1}–${q * 5}</span>
-          <input class="quadrant-input" name="q${q}_${index}" type="number" min="0" max="5" required placeholder="0">
+          <div class="quadrant-field">
+            <label for="q${q}_${index}">Q${q} do ${ranges[q]}</label>
+            <input id="q${q}_${index}" class="quadrant-input" name="q${q}_${index}" type="number" min="0" max="5" required placeholder="0">
+          </div>
         `).join('')}
       </div>
       <div class="set-footer">
